@@ -15,7 +15,9 @@ if (SUPERBUILD)
         build_target(zlib)
     endif()
 
-    build_target(curl)
+    if(NOT BUILD_WITHOUT_CURL)
+        build_target(curl)
+    endif()
 
     if(BUILD_MAVSDK_SERVER)
         build_target(openssl)
