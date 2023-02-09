@@ -11,11 +11,10 @@ if (SUPERBUILD)
     build_target(jsoncpp)
     build_target(tinyxml2)
 
-    if(NOT IOS)
-        build_target(zlib)
-    endif()
-
     if(NOT BUILD_WITHOUT_CURL)
+        if(NOT IOS)
+            build_target(zlib)
+        endif()
         build_target(curl)
     endif()
 
