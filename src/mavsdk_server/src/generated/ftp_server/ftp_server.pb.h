@@ -52,19 +52,19 @@ namespace ftp_server {
 class FtpServerResult;
 struct FtpServerResultDefaultTypeInternal;
 extern FtpServerResultDefaultTypeInternal _FtpServerResult_default_instance_;
-class ProvideFileRequest;
-struct ProvideFileRequestDefaultTypeInternal;
-extern ProvideFileRequestDefaultTypeInternal _ProvideFileRequest_default_instance_;
-class ProvideFileResponse;
-struct ProvideFileResponseDefaultTypeInternal;
-extern ProvideFileResponseDefaultTypeInternal _ProvideFileResponse_default_instance_;
+class SetRootDirRequest;
+struct SetRootDirRequestDefaultTypeInternal;
+extern SetRootDirRequestDefaultTypeInternal _SetRootDirRequest_default_instance_;
+class SetRootDirResponse;
+struct SetRootDirResponseDefaultTypeInternal;
+extern SetRootDirResponseDefaultTypeInternal _SetRootDirResponse_default_instance_;
 }  // namespace ftp_server
 }  // namespace rpc
 }  // namespace mavsdk
 PROTOBUF_NAMESPACE_OPEN
 template<> ::mavsdk::rpc::ftp_server::FtpServerResult* Arena::CreateMaybeMessage<::mavsdk::rpc::ftp_server::FtpServerResult>(Arena*);
-template<> ::mavsdk::rpc::ftp_server::ProvideFileRequest* Arena::CreateMaybeMessage<::mavsdk::rpc::ftp_server::ProvideFileRequest>(Arena*);
-template<> ::mavsdk::rpc::ftp_server::ProvideFileResponse* Arena::CreateMaybeMessage<::mavsdk::rpc::ftp_server::ProvideFileResponse>(Arena*);
+template<> ::mavsdk::rpc::ftp_server::SetRootDirRequest* Arena::CreateMaybeMessage<::mavsdk::rpc::ftp_server::SetRootDirRequest>(Arena*);
+template<> ::mavsdk::rpc::ftp_server::SetRootDirResponse* Arena::CreateMaybeMessage<::mavsdk::rpc::ftp_server::SetRootDirResponse>(Arena*);
 PROTOBUF_NAMESPACE_CLOSE
 namespace mavsdk {
 namespace rpc {
@@ -73,14 +73,14 @@ namespace ftp_server {
 enum FtpServerResult_Result : int {
   FtpServerResult_Result_RESULT_UNKNOWN = 0,
   FtpServerResult_Result_RESULT_SUCCESS = 1,
-  FtpServerResult_Result_RESULT_NOT_FOUND = 2,
-  FtpServerResult_Result_RESULT_DUPLICATE = 3,
+  FtpServerResult_Result_RESULT_DOES_NOT_EXIST = 2,
+  FtpServerResult_Result_RESULT_BUSY = 3,
   FtpServerResult_Result_FtpServerResult_Result_INT_MIN_SENTINEL_DO_NOT_USE_ = std::numeric_limits<int32_t>::min(),
   FtpServerResult_Result_FtpServerResult_Result_INT_MAX_SENTINEL_DO_NOT_USE_ = std::numeric_limits<int32_t>::max()
 };
 bool FtpServerResult_Result_IsValid(int value);
 constexpr FtpServerResult_Result FtpServerResult_Result_Result_MIN = FtpServerResult_Result_RESULT_UNKNOWN;
-constexpr FtpServerResult_Result FtpServerResult_Result_Result_MAX = FtpServerResult_Result_RESULT_DUPLICATE;
+constexpr FtpServerResult_Result FtpServerResult_Result_Result_MAX = FtpServerResult_Result_RESULT_BUSY;
 constexpr int FtpServerResult_Result_Result_ARRAYSIZE = FtpServerResult_Result_Result_MAX + 1;
 
 const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* FtpServerResult_Result_descriptor();
@@ -99,24 +99,24 @@ inline bool FtpServerResult_Result_Parse(
 }
 // ===================================================================
 
-class ProvideFileRequest final :
-    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:mavsdk.rpc.ftp_server.ProvideFileRequest) */ {
+class SetRootDirRequest final :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:mavsdk.rpc.ftp_server.SetRootDirRequest) */ {
  public:
-  inline ProvideFileRequest() : ProvideFileRequest(nullptr) {}
-  ~ProvideFileRequest() override;
-  explicit PROTOBUF_CONSTEXPR ProvideFileRequest(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
+  inline SetRootDirRequest() : SetRootDirRequest(nullptr) {}
+  ~SetRootDirRequest() override;
+  explicit PROTOBUF_CONSTEXPR SetRootDirRequest(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
 
-  ProvideFileRequest(const ProvideFileRequest& from);
-  ProvideFileRequest(ProvideFileRequest&& from) noexcept
-    : ProvideFileRequest() {
+  SetRootDirRequest(const SetRootDirRequest& from);
+  SetRootDirRequest(SetRootDirRequest&& from) noexcept
+    : SetRootDirRequest() {
     *this = ::std::move(from);
   }
 
-  inline ProvideFileRequest& operator=(const ProvideFileRequest& from) {
+  inline SetRootDirRequest& operator=(const SetRootDirRequest& from) {
     CopyFrom(from);
     return *this;
   }
-  inline ProvideFileRequest& operator=(ProvideFileRequest&& from) noexcept {
+  inline SetRootDirRequest& operator=(SetRootDirRequest&& from) noexcept {
     if (this == &from) return *this;
     if (GetOwningArena() == from.GetOwningArena()
   #ifdef PROTOBUF_FORCE_COPY_IN_MOVE
@@ -139,20 +139,20 @@ class ProvideFileRequest final :
   static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
     return default_instance().GetMetadata().reflection;
   }
-  static const ProvideFileRequest& default_instance() {
+  static const SetRootDirRequest& default_instance() {
     return *internal_default_instance();
   }
-  static inline const ProvideFileRequest* internal_default_instance() {
-    return reinterpret_cast<const ProvideFileRequest*>(
-               &_ProvideFileRequest_default_instance_);
+  static inline const SetRootDirRequest* internal_default_instance() {
+    return reinterpret_cast<const SetRootDirRequest*>(
+               &_SetRootDirRequest_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
     0;
 
-  friend void swap(ProvideFileRequest& a, ProvideFileRequest& b) {
+  friend void swap(SetRootDirRequest& a, SetRootDirRequest& b) {
     a.Swap(&b);
   }
-  inline void Swap(ProvideFileRequest* other) {
+  inline void Swap(SetRootDirRequest* other) {
     if (other == this) return;
   #ifdef PROTOBUF_FORCE_COPY_IN_SWAP
     if (GetOwningArena() != nullptr &&
@@ -165,7 +165,7 @@ class ProvideFileRequest final :
       ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
     }
   }
-  void UnsafeArenaSwap(ProvideFileRequest* other) {
+  void UnsafeArenaSwap(SetRootDirRequest* other) {
     if (other == this) return;
     GOOGLE_DCHECK(GetOwningArena() == other->GetOwningArena());
     InternalSwap(other);
@@ -173,13 +173,13 @@ class ProvideFileRequest final :
 
   // implements Message ----------------------------------------------
 
-  ProvideFileRequest* New(::PROTOBUF_NAMESPACE_ID::Arena* arena = nullptr) const final {
-    return CreateMaybeMessage<ProvideFileRequest>(arena);
+  SetRootDirRequest* New(::PROTOBUF_NAMESPACE_ID::Arena* arena = nullptr) const final {
+    return CreateMaybeMessage<SetRootDirRequest>(arena);
   }
   using ::PROTOBUF_NAMESPACE_ID::Message::CopyFrom;
-  void CopyFrom(const ProvideFileRequest& from);
+  void CopyFrom(const SetRootDirRequest& from);
   using ::PROTOBUF_NAMESPACE_ID::Message::MergeFrom;
-  void MergeFrom(const ProvideFileRequest& from);
+  void MergeFrom(const SetRootDirRequest& from);
   private:
   static void MergeImpl(::PROTOBUF_NAMESPACE_ID::Message* to, const ::PROTOBUF_NAMESPACE_ID::Message& from);
   public:
@@ -196,15 +196,15 @@ class ProvideFileRequest final :
   void SharedCtor();
   void SharedDtor();
   void SetCachedSize(int size) const final;
-  void InternalSwap(ProvideFileRequest* other);
+  void InternalSwap(SetRootDirRequest* other);
 
   private:
   friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
   static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
-    return "mavsdk.rpc.ftp_server.ProvideFileRequest";
+    return "mavsdk.rpc.ftp_server.SetRootDirRequest";
   }
   protected:
-  explicit ProvideFileRequest(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+  explicit SetRootDirRequest(::PROTOBUF_NAMESPACE_ID::Arena* arena,
                        bool is_message_owned = false);
   public:
 
@@ -234,7 +234,7 @@ class ProvideFileRequest final :
   std::string* _internal_mutable_path();
   public:
 
-  // @@protoc_insertion_point(class_scope:mavsdk.rpc.ftp_server.ProvideFileRequest)
+  // @@protoc_insertion_point(class_scope:mavsdk.rpc.ftp_server.SetRootDirRequest)
  private:
   class _Internal;
 
@@ -247,24 +247,24 @@ class ProvideFileRequest final :
 };
 // -------------------------------------------------------------------
 
-class ProvideFileResponse final :
-    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:mavsdk.rpc.ftp_server.ProvideFileResponse) */ {
+class SetRootDirResponse final :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:mavsdk.rpc.ftp_server.SetRootDirResponse) */ {
  public:
-  inline ProvideFileResponse() : ProvideFileResponse(nullptr) {}
-  ~ProvideFileResponse() override;
-  explicit PROTOBUF_CONSTEXPR ProvideFileResponse(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
+  inline SetRootDirResponse() : SetRootDirResponse(nullptr) {}
+  ~SetRootDirResponse() override;
+  explicit PROTOBUF_CONSTEXPR SetRootDirResponse(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
 
-  ProvideFileResponse(const ProvideFileResponse& from);
-  ProvideFileResponse(ProvideFileResponse&& from) noexcept
-    : ProvideFileResponse() {
+  SetRootDirResponse(const SetRootDirResponse& from);
+  SetRootDirResponse(SetRootDirResponse&& from) noexcept
+    : SetRootDirResponse() {
     *this = ::std::move(from);
   }
 
-  inline ProvideFileResponse& operator=(const ProvideFileResponse& from) {
+  inline SetRootDirResponse& operator=(const SetRootDirResponse& from) {
     CopyFrom(from);
     return *this;
   }
-  inline ProvideFileResponse& operator=(ProvideFileResponse&& from) noexcept {
+  inline SetRootDirResponse& operator=(SetRootDirResponse&& from) noexcept {
     if (this == &from) return *this;
     if (GetOwningArena() == from.GetOwningArena()
   #ifdef PROTOBUF_FORCE_COPY_IN_MOVE
@@ -287,20 +287,20 @@ class ProvideFileResponse final :
   static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
     return default_instance().GetMetadata().reflection;
   }
-  static const ProvideFileResponse& default_instance() {
+  static const SetRootDirResponse& default_instance() {
     return *internal_default_instance();
   }
-  static inline const ProvideFileResponse* internal_default_instance() {
-    return reinterpret_cast<const ProvideFileResponse*>(
-               &_ProvideFileResponse_default_instance_);
+  static inline const SetRootDirResponse* internal_default_instance() {
+    return reinterpret_cast<const SetRootDirResponse*>(
+               &_SetRootDirResponse_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
     1;
 
-  friend void swap(ProvideFileResponse& a, ProvideFileResponse& b) {
+  friend void swap(SetRootDirResponse& a, SetRootDirResponse& b) {
     a.Swap(&b);
   }
-  inline void Swap(ProvideFileResponse* other) {
+  inline void Swap(SetRootDirResponse* other) {
     if (other == this) return;
   #ifdef PROTOBUF_FORCE_COPY_IN_SWAP
     if (GetOwningArena() != nullptr &&
@@ -313,7 +313,7 @@ class ProvideFileResponse final :
       ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
     }
   }
-  void UnsafeArenaSwap(ProvideFileResponse* other) {
+  void UnsafeArenaSwap(SetRootDirResponse* other) {
     if (other == this) return;
     GOOGLE_DCHECK(GetOwningArena() == other->GetOwningArena());
     InternalSwap(other);
@@ -321,13 +321,13 @@ class ProvideFileResponse final :
 
   // implements Message ----------------------------------------------
 
-  ProvideFileResponse* New(::PROTOBUF_NAMESPACE_ID::Arena* arena = nullptr) const final {
-    return CreateMaybeMessage<ProvideFileResponse>(arena);
+  SetRootDirResponse* New(::PROTOBUF_NAMESPACE_ID::Arena* arena = nullptr) const final {
+    return CreateMaybeMessage<SetRootDirResponse>(arena);
   }
   using ::PROTOBUF_NAMESPACE_ID::Message::CopyFrom;
-  void CopyFrom(const ProvideFileResponse& from);
+  void CopyFrom(const SetRootDirResponse& from);
   using ::PROTOBUF_NAMESPACE_ID::Message::MergeFrom;
-  void MergeFrom(const ProvideFileResponse& from);
+  void MergeFrom(const SetRootDirResponse& from);
   private:
   static void MergeImpl(::PROTOBUF_NAMESPACE_ID::Message* to, const ::PROTOBUF_NAMESPACE_ID::Message& from);
   public:
@@ -344,15 +344,15 @@ class ProvideFileResponse final :
   void SharedCtor();
   void SharedDtor();
   void SetCachedSize(int size) const final;
-  void InternalSwap(ProvideFileResponse* other);
+  void InternalSwap(SetRootDirResponse* other);
 
   private:
   friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
   static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
-    return "mavsdk.rpc.ftp_server.ProvideFileResponse";
+    return "mavsdk.rpc.ftp_server.SetRootDirResponse";
   }
   protected:
-  explicit ProvideFileResponse(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+  explicit SetRootDirResponse(::PROTOBUF_NAMESPACE_ID::Arena* arena,
                        bool is_message_owned = false);
   public:
 
@@ -386,7 +386,7 @@ class ProvideFileResponse final :
       ::mavsdk::rpc::ftp_server::FtpServerResult* ftp_server_result);
   ::mavsdk::rpc::ftp_server::FtpServerResult* unsafe_arena_release_ftp_server_result();
 
-  // @@protoc_insertion_point(class_scope:mavsdk.rpc.ftp_server.ProvideFileResponse)
+  // @@protoc_insertion_point(class_scope:mavsdk.rpc.ftp_server.SetRootDirResponse)
  private:
   class _Internal;
 
@@ -520,10 +520,10 @@ class FtpServerResult final :
     FtpServerResult_Result_RESULT_UNKNOWN;
   static constexpr Result RESULT_SUCCESS =
     FtpServerResult_Result_RESULT_SUCCESS;
-  static constexpr Result RESULT_NOT_FOUND =
-    FtpServerResult_Result_RESULT_NOT_FOUND;
-  static constexpr Result RESULT_DUPLICATE =
-    FtpServerResult_Result_RESULT_DUPLICATE;
+  static constexpr Result RESULT_DOES_NOT_EXIST =
+    FtpServerResult_Result_RESULT_DOES_NOT_EXIST;
+  static constexpr Result RESULT_BUSY =
+    FtpServerResult_Result_RESULT_BUSY;
   static inline bool Result_IsValid(int value) {
     return FtpServerResult_Result_IsValid(value);
   }
@@ -599,44 +599,44 @@ class FtpServerResult final :
   #pragma GCC diagnostic push
   #pragma GCC diagnostic ignored "-Wstrict-aliasing"
 #endif  // __GNUC__
-// ProvideFileRequest
+// SetRootDirRequest
 
 // string path = 1;
-inline void ProvideFileRequest::clear_path() {
+inline void SetRootDirRequest::clear_path() {
   path_.ClearToEmpty();
 }
-inline const std::string& ProvideFileRequest::path() const {
-  // @@protoc_insertion_point(field_get:mavsdk.rpc.ftp_server.ProvideFileRequest.path)
+inline const std::string& SetRootDirRequest::path() const {
+  // @@protoc_insertion_point(field_get:mavsdk.rpc.ftp_server.SetRootDirRequest.path)
   return _internal_path();
 }
 template <typename ArgT0, typename... ArgT>
 inline PROTOBUF_ALWAYS_INLINE
-void ProvideFileRequest::set_path(ArgT0&& arg0, ArgT... args) {
+void SetRootDirRequest::set_path(ArgT0&& arg0, ArgT... args) {
  
  path_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
-  // @@protoc_insertion_point(field_set:mavsdk.rpc.ftp_server.ProvideFileRequest.path)
+  // @@protoc_insertion_point(field_set:mavsdk.rpc.ftp_server.SetRootDirRequest.path)
 }
-inline std::string* ProvideFileRequest::mutable_path() {
+inline std::string* SetRootDirRequest::mutable_path() {
   std::string* _s = _internal_mutable_path();
-  // @@protoc_insertion_point(field_mutable:mavsdk.rpc.ftp_server.ProvideFileRequest.path)
+  // @@protoc_insertion_point(field_mutable:mavsdk.rpc.ftp_server.SetRootDirRequest.path)
   return _s;
 }
-inline const std::string& ProvideFileRequest::_internal_path() const {
+inline const std::string& SetRootDirRequest::_internal_path() const {
   return path_.Get();
 }
-inline void ProvideFileRequest::_internal_set_path(const std::string& value) {
+inline void SetRootDirRequest::_internal_set_path(const std::string& value) {
   
   path_.Set(value, GetArenaForAllocation());
 }
-inline std::string* ProvideFileRequest::_internal_mutable_path() {
+inline std::string* SetRootDirRequest::_internal_mutable_path() {
   
   return path_.Mutable(GetArenaForAllocation());
 }
-inline std::string* ProvideFileRequest::release_path() {
-  // @@protoc_insertion_point(field_release:mavsdk.rpc.ftp_server.ProvideFileRequest.path)
+inline std::string* SetRootDirRequest::release_path() {
+  // @@protoc_insertion_point(field_release:mavsdk.rpc.ftp_server.SetRootDirRequest.path)
   return path_.Release();
 }
-inline void ProvideFileRequest::set_allocated_path(std::string* path) {
+inline void SetRootDirRequest::set_allocated_path(std::string* path) {
   if (path != nullptr) {
     
   } else {
@@ -648,36 +648,36 @@ inline void ProvideFileRequest::set_allocated_path(std::string* path) {
     path_.Set("", GetArenaForAllocation());
   }
 #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  // @@protoc_insertion_point(field_set_allocated:mavsdk.rpc.ftp_server.ProvideFileRequest.path)
+  // @@protoc_insertion_point(field_set_allocated:mavsdk.rpc.ftp_server.SetRootDirRequest.path)
 }
 
 // -------------------------------------------------------------------
 
-// ProvideFileResponse
+// SetRootDirResponse
 
 // .mavsdk.rpc.ftp_server.FtpServerResult ftp_server_result = 1;
-inline bool ProvideFileResponse::_internal_has_ftp_server_result() const {
+inline bool SetRootDirResponse::_internal_has_ftp_server_result() const {
   return this != internal_default_instance() && ftp_server_result_ != nullptr;
 }
-inline bool ProvideFileResponse::has_ftp_server_result() const {
+inline bool SetRootDirResponse::has_ftp_server_result() const {
   return _internal_has_ftp_server_result();
 }
-inline void ProvideFileResponse::clear_ftp_server_result() {
+inline void SetRootDirResponse::clear_ftp_server_result() {
   if (GetArenaForAllocation() == nullptr && ftp_server_result_ != nullptr) {
     delete ftp_server_result_;
   }
   ftp_server_result_ = nullptr;
 }
-inline const ::mavsdk::rpc::ftp_server::FtpServerResult& ProvideFileResponse::_internal_ftp_server_result() const {
+inline const ::mavsdk::rpc::ftp_server::FtpServerResult& SetRootDirResponse::_internal_ftp_server_result() const {
   const ::mavsdk::rpc::ftp_server::FtpServerResult* p = ftp_server_result_;
   return p != nullptr ? *p : reinterpret_cast<const ::mavsdk::rpc::ftp_server::FtpServerResult&>(
       ::mavsdk::rpc::ftp_server::_FtpServerResult_default_instance_);
 }
-inline const ::mavsdk::rpc::ftp_server::FtpServerResult& ProvideFileResponse::ftp_server_result() const {
-  // @@protoc_insertion_point(field_get:mavsdk.rpc.ftp_server.ProvideFileResponse.ftp_server_result)
+inline const ::mavsdk::rpc::ftp_server::FtpServerResult& SetRootDirResponse::ftp_server_result() const {
+  // @@protoc_insertion_point(field_get:mavsdk.rpc.ftp_server.SetRootDirResponse.ftp_server_result)
   return _internal_ftp_server_result();
 }
-inline void ProvideFileResponse::unsafe_arena_set_allocated_ftp_server_result(
+inline void SetRootDirResponse::unsafe_arena_set_allocated_ftp_server_result(
     ::mavsdk::rpc::ftp_server::FtpServerResult* ftp_server_result) {
   if (GetArenaForAllocation() == nullptr) {
     delete reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(ftp_server_result_);
@@ -688,9 +688,9 @@ inline void ProvideFileResponse::unsafe_arena_set_allocated_ftp_server_result(
   } else {
     
   }
-  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:mavsdk.rpc.ftp_server.ProvideFileResponse.ftp_server_result)
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:mavsdk.rpc.ftp_server.SetRootDirResponse.ftp_server_result)
 }
-inline ::mavsdk::rpc::ftp_server::FtpServerResult* ProvideFileResponse::release_ftp_server_result() {
+inline ::mavsdk::rpc::ftp_server::FtpServerResult* SetRootDirResponse::release_ftp_server_result() {
   
   ::mavsdk::rpc::ftp_server::FtpServerResult* temp = ftp_server_result_;
   ftp_server_result_ = nullptr;
@@ -705,14 +705,14 @@ inline ::mavsdk::rpc::ftp_server::FtpServerResult* ProvideFileResponse::release_
 #endif  // !PROTOBUF_FORCE_COPY_IN_RELEASE
   return temp;
 }
-inline ::mavsdk::rpc::ftp_server::FtpServerResult* ProvideFileResponse::unsafe_arena_release_ftp_server_result() {
-  // @@protoc_insertion_point(field_release:mavsdk.rpc.ftp_server.ProvideFileResponse.ftp_server_result)
+inline ::mavsdk::rpc::ftp_server::FtpServerResult* SetRootDirResponse::unsafe_arena_release_ftp_server_result() {
+  // @@protoc_insertion_point(field_release:mavsdk.rpc.ftp_server.SetRootDirResponse.ftp_server_result)
   
   ::mavsdk::rpc::ftp_server::FtpServerResult* temp = ftp_server_result_;
   ftp_server_result_ = nullptr;
   return temp;
 }
-inline ::mavsdk::rpc::ftp_server::FtpServerResult* ProvideFileResponse::_internal_mutable_ftp_server_result() {
+inline ::mavsdk::rpc::ftp_server::FtpServerResult* SetRootDirResponse::_internal_mutable_ftp_server_result() {
   
   if (ftp_server_result_ == nullptr) {
     auto* p = CreateMaybeMessage<::mavsdk::rpc::ftp_server::FtpServerResult>(GetArenaForAllocation());
@@ -720,12 +720,12 @@ inline ::mavsdk::rpc::ftp_server::FtpServerResult* ProvideFileResponse::_interna
   }
   return ftp_server_result_;
 }
-inline ::mavsdk::rpc::ftp_server::FtpServerResult* ProvideFileResponse::mutable_ftp_server_result() {
+inline ::mavsdk::rpc::ftp_server::FtpServerResult* SetRootDirResponse::mutable_ftp_server_result() {
   ::mavsdk::rpc::ftp_server::FtpServerResult* _msg = _internal_mutable_ftp_server_result();
-  // @@protoc_insertion_point(field_mutable:mavsdk.rpc.ftp_server.ProvideFileResponse.ftp_server_result)
+  // @@protoc_insertion_point(field_mutable:mavsdk.rpc.ftp_server.SetRootDirResponse.ftp_server_result)
   return _msg;
 }
-inline void ProvideFileResponse::set_allocated_ftp_server_result(::mavsdk::rpc::ftp_server::FtpServerResult* ftp_server_result) {
+inline void SetRootDirResponse::set_allocated_ftp_server_result(::mavsdk::rpc::ftp_server::FtpServerResult* ftp_server_result) {
   ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArenaForAllocation();
   if (message_arena == nullptr) {
     delete ftp_server_result_;
@@ -742,7 +742,7 @@ inline void ProvideFileResponse::set_allocated_ftp_server_result(::mavsdk::rpc::
     
   }
   ftp_server_result_ = ftp_server_result;
-  // @@protoc_insertion_point(field_set_allocated:mavsdk.rpc.ftp_server.ProvideFileResponse.ftp_server_result)
+  // @@protoc_insertion_point(field_set_allocated:mavsdk.rpc.ftp_server.SetRootDirResponse.ftp_server_result)
 }
 
 // -------------------------------------------------------------------

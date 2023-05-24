@@ -39,44 +39,54 @@ class FtpServerService final {
    public:
     virtual ~StubInterface() {}
     //
-    // Provide a file.
-    virtual ::grpc::Status ProvideFile(::grpc::ClientContext* context, const ::mavsdk::rpc::ftp_server::ProvideFileRequest& request, ::mavsdk::rpc::ftp_server::ProvideFileResponse* response) = 0;
-    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::mavsdk::rpc::ftp_server::ProvideFileResponse>> AsyncProvideFile(::grpc::ClientContext* context, const ::mavsdk::rpc::ftp_server::ProvideFileRequest& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::mavsdk::rpc::ftp_server::ProvideFileResponse>>(AsyncProvideFileRaw(context, request, cq));
+    // Set root directory.
+    //
+    // This is the directory that can then be accessed by a client.
+    // The directory needs to exist when this is called.
+    // The permissions are the same as the file permission for the user running the server.
+    // The root directory can't be changed while an FTP process is in progress.
+    virtual ::grpc::Status SetRootDir(::grpc::ClientContext* context, const ::mavsdk::rpc::ftp_server::SetRootDirRequest& request, ::mavsdk::rpc::ftp_server::SetRootDirResponse* response) = 0;
+    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::mavsdk::rpc::ftp_server::SetRootDirResponse>> AsyncSetRootDir(::grpc::ClientContext* context, const ::mavsdk::rpc::ftp_server::SetRootDirRequest& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::mavsdk::rpc::ftp_server::SetRootDirResponse>>(AsyncSetRootDirRaw(context, request, cq));
     }
-    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::mavsdk::rpc::ftp_server::ProvideFileResponse>> PrepareAsyncProvideFile(::grpc::ClientContext* context, const ::mavsdk::rpc::ftp_server::ProvideFileRequest& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::mavsdk::rpc::ftp_server::ProvideFileResponse>>(PrepareAsyncProvideFileRaw(context, request, cq));
+    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::mavsdk::rpc::ftp_server::SetRootDirResponse>> PrepareAsyncSetRootDir(::grpc::ClientContext* context, const ::mavsdk::rpc::ftp_server::SetRootDirRequest& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::mavsdk::rpc::ftp_server::SetRootDirResponse>>(PrepareAsyncSetRootDirRaw(context, request, cq));
     }
     class async_interface {
      public:
       virtual ~async_interface() {}
       //
-      // Provide a file.
-      virtual void ProvideFile(::grpc::ClientContext* context, const ::mavsdk::rpc::ftp_server::ProvideFileRequest* request, ::mavsdk::rpc::ftp_server::ProvideFileResponse* response, std::function<void(::grpc::Status)>) = 0;
-      virtual void ProvideFile(::grpc::ClientContext* context, const ::mavsdk::rpc::ftp_server::ProvideFileRequest* request, ::mavsdk::rpc::ftp_server::ProvideFileResponse* response, ::grpc::ClientUnaryReactor* reactor) = 0;
+      // Set root directory.
+      //
+      // This is the directory that can then be accessed by a client.
+      // The directory needs to exist when this is called.
+      // The permissions are the same as the file permission for the user running the server.
+      // The root directory can't be changed while an FTP process is in progress.
+      virtual void SetRootDir(::grpc::ClientContext* context, const ::mavsdk::rpc::ftp_server::SetRootDirRequest* request, ::mavsdk::rpc::ftp_server::SetRootDirResponse* response, std::function<void(::grpc::Status)>) = 0;
+      virtual void SetRootDir(::grpc::ClientContext* context, const ::mavsdk::rpc::ftp_server::SetRootDirRequest* request, ::mavsdk::rpc::ftp_server::SetRootDirResponse* response, ::grpc::ClientUnaryReactor* reactor) = 0;
     };
     typedef class async_interface experimental_async_interface;
     virtual class async_interface* async() { return nullptr; }
     class async_interface* experimental_async() { return async(); }
    private:
-    virtual ::grpc::ClientAsyncResponseReaderInterface< ::mavsdk::rpc::ftp_server::ProvideFileResponse>* AsyncProvideFileRaw(::grpc::ClientContext* context, const ::mavsdk::rpc::ftp_server::ProvideFileRequest& request, ::grpc::CompletionQueue* cq) = 0;
-    virtual ::grpc::ClientAsyncResponseReaderInterface< ::mavsdk::rpc::ftp_server::ProvideFileResponse>* PrepareAsyncProvideFileRaw(::grpc::ClientContext* context, const ::mavsdk::rpc::ftp_server::ProvideFileRequest& request, ::grpc::CompletionQueue* cq) = 0;
+    virtual ::grpc::ClientAsyncResponseReaderInterface< ::mavsdk::rpc::ftp_server::SetRootDirResponse>* AsyncSetRootDirRaw(::grpc::ClientContext* context, const ::mavsdk::rpc::ftp_server::SetRootDirRequest& request, ::grpc::CompletionQueue* cq) = 0;
+    virtual ::grpc::ClientAsyncResponseReaderInterface< ::mavsdk::rpc::ftp_server::SetRootDirResponse>* PrepareAsyncSetRootDirRaw(::grpc::ClientContext* context, const ::mavsdk::rpc::ftp_server::SetRootDirRequest& request, ::grpc::CompletionQueue* cq) = 0;
   };
   class Stub final : public StubInterface {
    public:
     Stub(const std::shared_ptr< ::grpc::ChannelInterface>& channel, const ::grpc::StubOptions& options = ::grpc::StubOptions());
-    ::grpc::Status ProvideFile(::grpc::ClientContext* context, const ::mavsdk::rpc::ftp_server::ProvideFileRequest& request, ::mavsdk::rpc::ftp_server::ProvideFileResponse* response) override;
-    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::mavsdk::rpc::ftp_server::ProvideFileResponse>> AsyncProvideFile(::grpc::ClientContext* context, const ::mavsdk::rpc::ftp_server::ProvideFileRequest& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::mavsdk::rpc::ftp_server::ProvideFileResponse>>(AsyncProvideFileRaw(context, request, cq));
+    ::grpc::Status SetRootDir(::grpc::ClientContext* context, const ::mavsdk::rpc::ftp_server::SetRootDirRequest& request, ::mavsdk::rpc::ftp_server::SetRootDirResponse* response) override;
+    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::mavsdk::rpc::ftp_server::SetRootDirResponse>> AsyncSetRootDir(::grpc::ClientContext* context, const ::mavsdk::rpc::ftp_server::SetRootDirRequest& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::mavsdk::rpc::ftp_server::SetRootDirResponse>>(AsyncSetRootDirRaw(context, request, cq));
     }
-    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::mavsdk::rpc::ftp_server::ProvideFileResponse>> PrepareAsyncProvideFile(::grpc::ClientContext* context, const ::mavsdk::rpc::ftp_server::ProvideFileRequest& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::mavsdk::rpc::ftp_server::ProvideFileResponse>>(PrepareAsyncProvideFileRaw(context, request, cq));
+    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::mavsdk::rpc::ftp_server::SetRootDirResponse>> PrepareAsyncSetRootDir(::grpc::ClientContext* context, const ::mavsdk::rpc::ftp_server::SetRootDirRequest& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::mavsdk::rpc::ftp_server::SetRootDirResponse>>(PrepareAsyncSetRootDirRaw(context, request, cq));
     }
     class async final :
       public StubInterface::async_interface {
      public:
-      void ProvideFile(::grpc::ClientContext* context, const ::mavsdk::rpc::ftp_server::ProvideFileRequest* request, ::mavsdk::rpc::ftp_server::ProvideFileResponse* response, std::function<void(::grpc::Status)>) override;
-      void ProvideFile(::grpc::ClientContext* context, const ::mavsdk::rpc::ftp_server::ProvideFileRequest* request, ::mavsdk::rpc::ftp_server::ProvideFileResponse* response, ::grpc::ClientUnaryReactor* reactor) override;
+      void SetRootDir(::grpc::ClientContext* context, const ::mavsdk::rpc::ftp_server::SetRootDirRequest* request, ::mavsdk::rpc::ftp_server::SetRootDirResponse* response, std::function<void(::grpc::Status)>) override;
+      void SetRootDir(::grpc::ClientContext* context, const ::mavsdk::rpc::ftp_server::SetRootDirRequest* request, ::mavsdk::rpc::ftp_server::SetRootDirResponse* response, ::grpc::ClientUnaryReactor* reactor) override;
      private:
       friend class Stub;
       explicit async(Stub* stub): stub_(stub) { }
@@ -88,9 +98,9 @@ class FtpServerService final {
    private:
     std::shared_ptr< ::grpc::ChannelInterface> channel_;
     class async async_stub_{this};
-    ::grpc::ClientAsyncResponseReader< ::mavsdk::rpc::ftp_server::ProvideFileResponse>* AsyncProvideFileRaw(::grpc::ClientContext* context, const ::mavsdk::rpc::ftp_server::ProvideFileRequest& request, ::grpc::CompletionQueue* cq) override;
-    ::grpc::ClientAsyncResponseReader< ::mavsdk::rpc::ftp_server::ProvideFileResponse>* PrepareAsyncProvideFileRaw(::grpc::ClientContext* context, const ::mavsdk::rpc::ftp_server::ProvideFileRequest& request, ::grpc::CompletionQueue* cq) override;
-    const ::grpc::internal::RpcMethod rpcmethod_ProvideFile_;
+    ::grpc::ClientAsyncResponseReader< ::mavsdk::rpc::ftp_server::SetRootDirResponse>* AsyncSetRootDirRaw(::grpc::ClientContext* context, const ::mavsdk::rpc::ftp_server::SetRootDirRequest& request, ::grpc::CompletionQueue* cq) override;
+    ::grpc::ClientAsyncResponseReader< ::mavsdk::rpc::ftp_server::SetRootDirResponse>* PrepareAsyncSetRootDirRaw(::grpc::ClientContext* context, const ::mavsdk::rpc::ftp_server::SetRootDirRequest& request, ::grpc::CompletionQueue* cq) override;
+    const ::grpc::internal::RpcMethod rpcmethod_SetRootDir_;
   };
   static std::unique_ptr<Stub> NewStub(const std::shared_ptr< ::grpc::ChannelInterface>& channel, const ::grpc::StubOptions& options = ::grpc::StubOptions());
 
@@ -99,148 +109,153 @@ class FtpServerService final {
     Service();
     virtual ~Service();
     //
-    // Provide a file.
-    virtual ::grpc::Status ProvideFile(::grpc::ServerContext* context, const ::mavsdk::rpc::ftp_server::ProvideFileRequest* request, ::mavsdk::rpc::ftp_server::ProvideFileResponse* response);
+    // Set root directory.
+    //
+    // This is the directory that can then be accessed by a client.
+    // The directory needs to exist when this is called.
+    // The permissions are the same as the file permission for the user running the server.
+    // The root directory can't be changed while an FTP process is in progress.
+    virtual ::grpc::Status SetRootDir(::grpc::ServerContext* context, const ::mavsdk::rpc::ftp_server::SetRootDirRequest* request, ::mavsdk::rpc::ftp_server::SetRootDirResponse* response);
   };
   template <class BaseClass>
-  class WithAsyncMethod_ProvideFile : public BaseClass {
+  class WithAsyncMethod_SetRootDir : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
-    WithAsyncMethod_ProvideFile() {
+    WithAsyncMethod_SetRootDir() {
       ::grpc::Service::MarkMethodAsync(0);
     }
-    ~WithAsyncMethod_ProvideFile() override {
+    ~WithAsyncMethod_SetRootDir() override {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status ProvideFile(::grpc::ServerContext* /*context*/, const ::mavsdk::rpc::ftp_server::ProvideFileRequest* /*request*/, ::mavsdk::rpc::ftp_server::ProvideFileResponse* /*response*/) override {
+    ::grpc::Status SetRootDir(::grpc::ServerContext* /*context*/, const ::mavsdk::rpc::ftp_server::SetRootDirRequest* /*request*/, ::mavsdk::rpc::ftp_server::SetRootDirResponse* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
-    void RequestProvideFile(::grpc::ServerContext* context, ::mavsdk::rpc::ftp_server::ProvideFileRequest* request, ::grpc::ServerAsyncResponseWriter< ::mavsdk::rpc::ftp_server::ProvideFileResponse>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+    void RequestSetRootDir(::grpc::ServerContext* context, ::mavsdk::rpc::ftp_server::SetRootDirRequest* request, ::grpc::ServerAsyncResponseWriter< ::mavsdk::rpc::ftp_server::SetRootDirResponse>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
       ::grpc::Service::RequestAsyncUnary(0, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
-  typedef WithAsyncMethod_ProvideFile<Service > AsyncService;
+  typedef WithAsyncMethod_SetRootDir<Service > AsyncService;
   template <class BaseClass>
-  class WithCallbackMethod_ProvideFile : public BaseClass {
+  class WithCallbackMethod_SetRootDir : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
-    WithCallbackMethod_ProvideFile() {
+    WithCallbackMethod_SetRootDir() {
       ::grpc::Service::MarkMethodCallback(0,
-          new ::grpc::internal::CallbackUnaryHandler< ::mavsdk::rpc::ftp_server::ProvideFileRequest, ::mavsdk::rpc::ftp_server::ProvideFileResponse>(
+          new ::grpc::internal::CallbackUnaryHandler< ::mavsdk::rpc::ftp_server::SetRootDirRequest, ::mavsdk::rpc::ftp_server::SetRootDirResponse>(
             [this](
-                   ::grpc::CallbackServerContext* context, const ::mavsdk::rpc::ftp_server::ProvideFileRequest* request, ::mavsdk::rpc::ftp_server::ProvideFileResponse* response) { return this->ProvideFile(context, request, response); }));}
-    void SetMessageAllocatorFor_ProvideFile(
-        ::grpc::MessageAllocator< ::mavsdk::rpc::ftp_server::ProvideFileRequest, ::mavsdk::rpc::ftp_server::ProvideFileResponse>* allocator) {
+                   ::grpc::CallbackServerContext* context, const ::mavsdk::rpc::ftp_server::SetRootDirRequest* request, ::mavsdk::rpc::ftp_server::SetRootDirResponse* response) { return this->SetRootDir(context, request, response); }));}
+    void SetMessageAllocatorFor_SetRootDir(
+        ::grpc::MessageAllocator< ::mavsdk::rpc::ftp_server::SetRootDirRequest, ::mavsdk::rpc::ftp_server::SetRootDirResponse>* allocator) {
       ::grpc::internal::MethodHandler* const handler = ::grpc::Service::GetHandler(0);
-      static_cast<::grpc::internal::CallbackUnaryHandler< ::mavsdk::rpc::ftp_server::ProvideFileRequest, ::mavsdk::rpc::ftp_server::ProvideFileResponse>*>(handler)
+      static_cast<::grpc::internal::CallbackUnaryHandler< ::mavsdk::rpc::ftp_server::SetRootDirRequest, ::mavsdk::rpc::ftp_server::SetRootDirResponse>*>(handler)
               ->SetMessageAllocator(allocator);
     }
-    ~WithCallbackMethod_ProvideFile() override {
+    ~WithCallbackMethod_SetRootDir() override {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status ProvideFile(::grpc::ServerContext* /*context*/, const ::mavsdk::rpc::ftp_server::ProvideFileRequest* /*request*/, ::mavsdk::rpc::ftp_server::ProvideFileResponse* /*response*/) override {
+    ::grpc::Status SetRootDir(::grpc::ServerContext* /*context*/, const ::mavsdk::rpc::ftp_server::SetRootDirRequest* /*request*/, ::mavsdk::rpc::ftp_server::SetRootDirResponse* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
-    virtual ::grpc::ServerUnaryReactor* ProvideFile(
-      ::grpc::CallbackServerContext* /*context*/, const ::mavsdk::rpc::ftp_server::ProvideFileRequest* /*request*/, ::mavsdk::rpc::ftp_server::ProvideFileResponse* /*response*/)  { return nullptr; }
+    virtual ::grpc::ServerUnaryReactor* SetRootDir(
+      ::grpc::CallbackServerContext* /*context*/, const ::mavsdk::rpc::ftp_server::SetRootDirRequest* /*request*/, ::mavsdk::rpc::ftp_server::SetRootDirResponse* /*response*/)  { return nullptr; }
   };
-  typedef WithCallbackMethod_ProvideFile<Service > CallbackService;
+  typedef WithCallbackMethod_SetRootDir<Service > CallbackService;
   typedef CallbackService ExperimentalCallbackService;
   template <class BaseClass>
-  class WithGenericMethod_ProvideFile : public BaseClass {
+  class WithGenericMethod_SetRootDir : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
-    WithGenericMethod_ProvideFile() {
+    WithGenericMethod_SetRootDir() {
       ::grpc::Service::MarkMethodGeneric(0);
     }
-    ~WithGenericMethod_ProvideFile() override {
+    ~WithGenericMethod_SetRootDir() override {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status ProvideFile(::grpc::ServerContext* /*context*/, const ::mavsdk::rpc::ftp_server::ProvideFileRequest* /*request*/, ::mavsdk::rpc::ftp_server::ProvideFileResponse* /*response*/) override {
+    ::grpc::Status SetRootDir(::grpc::ServerContext* /*context*/, const ::mavsdk::rpc::ftp_server::SetRootDirRequest* /*request*/, ::mavsdk::rpc::ftp_server::SetRootDirResponse* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
   };
   template <class BaseClass>
-  class WithRawMethod_ProvideFile : public BaseClass {
+  class WithRawMethod_SetRootDir : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
-    WithRawMethod_ProvideFile() {
+    WithRawMethod_SetRootDir() {
       ::grpc::Service::MarkMethodRaw(0);
     }
-    ~WithRawMethod_ProvideFile() override {
+    ~WithRawMethod_SetRootDir() override {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status ProvideFile(::grpc::ServerContext* /*context*/, const ::mavsdk::rpc::ftp_server::ProvideFileRequest* /*request*/, ::mavsdk::rpc::ftp_server::ProvideFileResponse* /*response*/) override {
+    ::grpc::Status SetRootDir(::grpc::ServerContext* /*context*/, const ::mavsdk::rpc::ftp_server::SetRootDirRequest* /*request*/, ::mavsdk::rpc::ftp_server::SetRootDirResponse* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
-    void RequestProvideFile(::grpc::ServerContext* context, ::grpc::ByteBuffer* request, ::grpc::ServerAsyncResponseWriter< ::grpc::ByteBuffer>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+    void RequestSetRootDir(::grpc::ServerContext* context, ::grpc::ByteBuffer* request, ::grpc::ServerAsyncResponseWriter< ::grpc::ByteBuffer>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
       ::grpc::Service::RequestAsyncUnary(0, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
   template <class BaseClass>
-  class WithRawCallbackMethod_ProvideFile : public BaseClass {
+  class WithRawCallbackMethod_SetRootDir : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
-    WithRawCallbackMethod_ProvideFile() {
+    WithRawCallbackMethod_SetRootDir() {
       ::grpc::Service::MarkMethodRawCallback(0,
           new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
             [this](
-                   ::grpc::CallbackServerContext* context, const ::grpc::ByteBuffer* request, ::grpc::ByteBuffer* response) { return this->ProvideFile(context, request, response); }));
+                   ::grpc::CallbackServerContext* context, const ::grpc::ByteBuffer* request, ::grpc::ByteBuffer* response) { return this->SetRootDir(context, request, response); }));
     }
-    ~WithRawCallbackMethod_ProvideFile() override {
+    ~WithRawCallbackMethod_SetRootDir() override {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status ProvideFile(::grpc::ServerContext* /*context*/, const ::mavsdk::rpc::ftp_server::ProvideFileRequest* /*request*/, ::mavsdk::rpc::ftp_server::ProvideFileResponse* /*response*/) override {
+    ::grpc::Status SetRootDir(::grpc::ServerContext* /*context*/, const ::mavsdk::rpc::ftp_server::SetRootDirRequest* /*request*/, ::mavsdk::rpc::ftp_server::SetRootDirResponse* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
-    virtual ::grpc::ServerUnaryReactor* ProvideFile(
+    virtual ::grpc::ServerUnaryReactor* SetRootDir(
       ::grpc::CallbackServerContext* /*context*/, const ::grpc::ByteBuffer* /*request*/, ::grpc::ByteBuffer* /*response*/)  { return nullptr; }
   };
   template <class BaseClass>
-  class WithStreamedUnaryMethod_ProvideFile : public BaseClass {
+  class WithStreamedUnaryMethod_SetRootDir : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
-    WithStreamedUnaryMethod_ProvideFile() {
+    WithStreamedUnaryMethod_SetRootDir() {
       ::grpc::Service::MarkMethodStreamed(0,
         new ::grpc::internal::StreamedUnaryHandler<
-          ::mavsdk::rpc::ftp_server::ProvideFileRequest, ::mavsdk::rpc::ftp_server::ProvideFileResponse>(
+          ::mavsdk::rpc::ftp_server::SetRootDirRequest, ::mavsdk::rpc::ftp_server::SetRootDirResponse>(
             [this](::grpc::ServerContext* context,
                    ::grpc::ServerUnaryStreamer<
-                     ::mavsdk::rpc::ftp_server::ProvideFileRequest, ::mavsdk::rpc::ftp_server::ProvideFileResponse>* streamer) {
-                       return this->StreamedProvideFile(context,
+                     ::mavsdk::rpc::ftp_server::SetRootDirRequest, ::mavsdk::rpc::ftp_server::SetRootDirResponse>* streamer) {
+                       return this->StreamedSetRootDir(context,
                          streamer);
                   }));
     }
-    ~WithStreamedUnaryMethod_ProvideFile() override {
+    ~WithStreamedUnaryMethod_SetRootDir() override {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable regular version of this method
-    ::grpc::Status ProvideFile(::grpc::ServerContext* /*context*/, const ::mavsdk::rpc::ftp_server::ProvideFileRequest* /*request*/, ::mavsdk::rpc::ftp_server::ProvideFileResponse* /*response*/) override {
+    ::grpc::Status SetRootDir(::grpc::ServerContext* /*context*/, const ::mavsdk::rpc::ftp_server::SetRootDirRequest* /*request*/, ::mavsdk::rpc::ftp_server::SetRootDirResponse* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     // replace default version of method with streamed unary
-    virtual ::grpc::Status StreamedProvideFile(::grpc::ServerContext* context, ::grpc::ServerUnaryStreamer< ::mavsdk::rpc::ftp_server::ProvideFileRequest,::mavsdk::rpc::ftp_server::ProvideFileResponse>* server_unary_streamer) = 0;
+    virtual ::grpc::Status StreamedSetRootDir(::grpc::ServerContext* context, ::grpc::ServerUnaryStreamer< ::mavsdk::rpc::ftp_server::SetRootDirRequest,::mavsdk::rpc::ftp_server::SetRootDirResponse>* server_unary_streamer) = 0;
   };
-  typedef WithStreamedUnaryMethod_ProvideFile<Service > StreamedUnaryService;
+  typedef WithStreamedUnaryMethod_SetRootDir<Service > StreamedUnaryService;
   typedef Service SplitStreamedService;
-  typedef WithStreamedUnaryMethod_ProvideFile<Service > StreamedService;
+  typedef WithStreamedUnaryMethod_SetRootDir<Service > StreamedService;
 };
 
 }  // namespace ftp_server

@@ -51,8 +51,8 @@ public:
     enum class Result {
         Unknown, /**< @brief Unknown result. */
         Success, /**< @brief Request succeeded. */
-        NotFound, /**< @brief Not Found. */
-        Duplicate, /**< @brief Entry already exists. */
+        DoesNotExist, /**< @brief Directory does not exist. */
+        Busy, /**< @brief Operations in progress. */
     };
 
     /**
@@ -68,13 +68,18 @@ public:
     using ResultCallback = std::function<void(Result)>;
 
     /**
-     * @brief Provide a file.
+     * @brief Set root directory.
+     *
+     * This is the directory that can then be accessed by a client.
+     * The directory needs to exist when this is called.
+     * The permissions are the same as the file permission for the user running the server.
+     * The root directory can't be changed while an FTP process is in progress.
      *
      * This function is blocking.
      *
      * @return Result of request.
      */
-    Result provide_file(std::string path) const;
+    Result set_root_dir(std::string path) const;
 
     /**
      * @brief Copy constructor.

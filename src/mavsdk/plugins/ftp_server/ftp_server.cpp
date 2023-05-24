@@ -16,9 +16,9 @@ FtpServer::FtpServer(std::shared_ptr<ServerComponent> server_component) :
 
 FtpServer::~FtpServer() {}
 
-FtpServer::Result FtpServer::provide_file(std::string path) const
+FtpServer::Result FtpServer::set_root_dir(std::string path) const
 {
-    return _impl->provide_file(path);
+    return _impl->set_root_dir(path);
 }
 
 std::ostream& operator<<(std::ostream& str, FtpServer::Result const& result)
@@ -28,10 +28,10 @@ std::ostream& operator<<(std::ostream& str, FtpServer::Result const& result)
             return str << "Unknown";
         case FtpServer::Result::Success:
             return str << "Success";
-        case FtpServer::Result::NotFound:
-            return str << "Not Found";
-        case FtpServer::Result::Duplicate:
-            return str << "Duplicate";
+        case FtpServer::Result::DoesNotExist:
+            return str << "Does Not Exist";
+        case FtpServer::Result::Busy:
+            return str << "Busy";
         default:
             return str << "Unknown";
     }

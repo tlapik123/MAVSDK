@@ -52,10 +52,10 @@ public:
                 return rpc::ftp_server::FtpServerResult_Result_RESULT_UNKNOWN;
             case mavsdk::FtpServer::Result::Success:
                 return rpc::ftp_server::FtpServerResult_Result_RESULT_SUCCESS;
-            case mavsdk::FtpServer::Result::NotFound:
-                return rpc::ftp_server::FtpServerResult_Result_RESULT_NOT_FOUND;
-            case mavsdk::FtpServer::Result::Duplicate:
-                return rpc::ftp_server::FtpServerResult_Result_RESULT_DUPLICATE;
+            case mavsdk::FtpServer::Result::DoesNotExist:
+                return rpc::ftp_server::FtpServerResult_Result_RESULT_DOES_NOT_EXIST;
+            case mavsdk::FtpServer::Result::Busy:
+                return rpc::ftp_server::FtpServerResult_Result_RESULT_BUSY;
         }
     }
 
@@ -70,17 +70,17 @@ public:
                 return mavsdk::FtpServer::Result::Unknown;
             case rpc::ftp_server::FtpServerResult_Result_RESULT_SUCCESS:
                 return mavsdk::FtpServer::Result::Success;
-            case rpc::ftp_server::FtpServerResult_Result_RESULT_NOT_FOUND:
-                return mavsdk::FtpServer::Result::NotFound;
-            case rpc::ftp_server::FtpServerResult_Result_RESULT_DUPLICATE:
-                return mavsdk::FtpServer::Result::Duplicate;
+            case rpc::ftp_server::FtpServerResult_Result_RESULT_DOES_NOT_EXIST:
+                return mavsdk::FtpServer::Result::DoesNotExist;
+            case rpc::ftp_server::FtpServerResult_Result_RESULT_BUSY:
+                return mavsdk::FtpServer::Result::Busy;
         }
     }
 
-    grpc::Status ProvideFile(
+    grpc::Status SetRootDir(
         grpc::ServerContext* /* context */,
-        const rpc::ftp_server::ProvideFileRequest* request,
-        rpc::ftp_server::ProvideFileResponse* response) override
+        const rpc::ftp_server::SetRootDirRequest* request,
+        rpc::ftp_server::SetRootDirResponse* response) override
     {
         if (_lazy_plugin.maybe_plugin() == nullptr) {
             if (response != nullptr) {
@@ -94,11 +94,11 @@ public:
         }
 
         if (request == nullptr) {
-            LogWarn() << "ProvideFile sent with a null request! Ignoring...";
+            LogWarn() << "SetRootDir sent with a null request! Ignoring...";
             return grpc::Status::OK;
         }
 
-        auto result = _lazy_plugin.maybe_plugin()->provide_file(request->path());
+        auto result = _lazy_plugin.maybe_plugin()->set_root_dir(request->path());
 
         if (response != nullptr) {
             fillResponseWithResult(response, result);

@@ -24,7 +24,7 @@ namespace rpc {
 namespace ftp_server {
 
 static const char* FtpServerService_method_names[] = {
-  "/mavsdk.rpc.ftp_server.FtpServerService/ProvideFile",
+  "/mavsdk.rpc.ftp_server.FtpServerService/SetRootDir",
 };
 
 std::unique_ptr< FtpServerService::Stub> FtpServerService::NewStub(const std::shared_ptr< ::grpc::ChannelInterface>& channel, const ::grpc::StubOptions& options) {
@@ -34,28 +34,28 @@ std::unique_ptr< FtpServerService::Stub> FtpServerService::NewStub(const std::sh
 }
 
 FtpServerService::Stub::Stub(const std::shared_ptr< ::grpc::ChannelInterface>& channel, const ::grpc::StubOptions& options)
-  : channel_(channel), rpcmethod_ProvideFile_(FtpServerService_method_names[0], options.suffix_for_stats(),::grpc::internal::RpcMethod::NORMAL_RPC, channel)
+  : channel_(channel), rpcmethod_SetRootDir_(FtpServerService_method_names[0], options.suffix_for_stats(),::grpc::internal::RpcMethod::NORMAL_RPC, channel)
   {}
 
-::grpc::Status FtpServerService::Stub::ProvideFile(::grpc::ClientContext* context, const ::mavsdk::rpc::ftp_server::ProvideFileRequest& request, ::mavsdk::rpc::ftp_server::ProvideFileResponse* response) {
-  return ::grpc::internal::BlockingUnaryCall< ::mavsdk::rpc::ftp_server::ProvideFileRequest, ::mavsdk::rpc::ftp_server::ProvideFileResponse, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(channel_.get(), rpcmethod_ProvideFile_, context, request, response);
+::grpc::Status FtpServerService::Stub::SetRootDir(::grpc::ClientContext* context, const ::mavsdk::rpc::ftp_server::SetRootDirRequest& request, ::mavsdk::rpc::ftp_server::SetRootDirResponse* response) {
+  return ::grpc::internal::BlockingUnaryCall< ::mavsdk::rpc::ftp_server::SetRootDirRequest, ::mavsdk::rpc::ftp_server::SetRootDirResponse, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(channel_.get(), rpcmethod_SetRootDir_, context, request, response);
 }
 
-void FtpServerService::Stub::async::ProvideFile(::grpc::ClientContext* context, const ::mavsdk::rpc::ftp_server::ProvideFileRequest* request, ::mavsdk::rpc::ftp_server::ProvideFileResponse* response, std::function<void(::grpc::Status)> f) {
-  ::grpc::internal::CallbackUnaryCall< ::mavsdk::rpc::ftp_server::ProvideFileRequest, ::mavsdk::rpc::ftp_server::ProvideFileResponse, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(stub_->channel_.get(), stub_->rpcmethod_ProvideFile_, context, request, response, std::move(f));
+void FtpServerService::Stub::async::SetRootDir(::grpc::ClientContext* context, const ::mavsdk::rpc::ftp_server::SetRootDirRequest* request, ::mavsdk::rpc::ftp_server::SetRootDirResponse* response, std::function<void(::grpc::Status)> f) {
+  ::grpc::internal::CallbackUnaryCall< ::mavsdk::rpc::ftp_server::SetRootDirRequest, ::mavsdk::rpc::ftp_server::SetRootDirResponse, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(stub_->channel_.get(), stub_->rpcmethod_SetRootDir_, context, request, response, std::move(f));
 }
 
-void FtpServerService::Stub::async::ProvideFile(::grpc::ClientContext* context, const ::mavsdk::rpc::ftp_server::ProvideFileRequest* request, ::mavsdk::rpc::ftp_server::ProvideFileResponse* response, ::grpc::ClientUnaryReactor* reactor) {
-  ::grpc::internal::ClientCallbackUnaryFactory::Create< ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(stub_->channel_.get(), stub_->rpcmethod_ProvideFile_, context, request, response, reactor);
+void FtpServerService::Stub::async::SetRootDir(::grpc::ClientContext* context, const ::mavsdk::rpc::ftp_server::SetRootDirRequest* request, ::mavsdk::rpc::ftp_server::SetRootDirResponse* response, ::grpc::ClientUnaryReactor* reactor) {
+  ::grpc::internal::ClientCallbackUnaryFactory::Create< ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(stub_->channel_.get(), stub_->rpcmethod_SetRootDir_, context, request, response, reactor);
 }
 
-::grpc::ClientAsyncResponseReader< ::mavsdk::rpc::ftp_server::ProvideFileResponse>* FtpServerService::Stub::PrepareAsyncProvideFileRaw(::grpc::ClientContext* context, const ::mavsdk::rpc::ftp_server::ProvideFileRequest& request, ::grpc::CompletionQueue* cq) {
-  return ::grpc::internal::ClientAsyncResponseReaderHelper::Create< ::mavsdk::rpc::ftp_server::ProvideFileResponse, ::mavsdk::rpc::ftp_server::ProvideFileRequest, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(channel_.get(), cq, rpcmethod_ProvideFile_, context, request);
+::grpc::ClientAsyncResponseReader< ::mavsdk::rpc::ftp_server::SetRootDirResponse>* FtpServerService::Stub::PrepareAsyncSetRootDirRaw(::grpc::ClientContext* context, const ::mavsdk::rpc::ftp_server::SetRootDirRequest& request, ::grpc::CompletionQueue* cq) {
+  return ::grpc::internal::ClientAsyncResponseReaderHelper::Create< ::mavsdk::rpc::ftp_server::SetRootDirResponse, ::mavsdk::rpc::ftp_server::SetRootDirRequest, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(channel_.get(), cq, rpcmethod_SetRootDir_, context, request);
 }
 
-::grpc::ClientAsyncResponseReader< ::mavsdk::rpc::ftp_server::ProvideFileResponse>* FtpServerService::Stub::AsyncProvideFileRaw(::grpc::ClientContext* context, const ::mavsdk::rpc::ftp_server::ProvideFileRequest& request, ::grpc::CompletionQueue* cq) {
+::grpc::ClientAsyncResponseReader< ::mavsdk::rpc::ftp_server::SetRootDirResponse>* FtpServerService::Stub::AsyncSetRootDirRaw(::grpc::ClientContext* context, const ::mavsdk::rpc::ftp_server::SetRootDirRequest& request, ::grpc::CompletionQueue* cq) {
   auto* result =
-    this->PrepareAsyncProvideFileRaw(context, request, cq);
+    this->PrepareAsyncSetRootDirRaw(context, request, cq);
   result->StartCall();
   return result;
 }
@@ -64,19 +64,19 @@ FtpServerService::Service::Service() {
   AddMethod(new ::grpc::internal::RpcServiceMethod(
       FtpServerService_method_names[0],
       ::grpc::internal::RpcMethod::NORMAL_RPC,
-      new ::grpc::internal::RpcMethodHandler< FtpServerService::Service, ::mavsdk::rpc::ftp_server::ProvideFileRequest, ::mavsdk::rpc::ftp_server::ProvideFileResponse, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(
+      new ::grpc::internal::RpcMethodHandler< FtpServerService::Service, ::mavsdk::rpc::ftp_server::SetRootDirRequest, ::mavsdk::rpc::ftp_server::SetRootDirResponse, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(
           [](FtpServerService::Service* service,
              ::grpc::ServerContext* ctx,
-             const ::mavsdk::rpc::ftp_server::ProvideFileRequest* req,
-             ::mavsdk::rpc::ftp_server::ProvideFileResponse* resp) {
-               return service->ProvideFile(ctx, req, resp);
+             const ::mavsdk::rpc::ftp_server::SetRootDirRequest* req,
+             ::mavsdk::rpc::ftp_server::SetRootDirResponse* resp) {
+               return service->SetRootDir(ctx, req, resp);
              }, this)));
 }
 
 FtpServerService::Service::~Service() {
 }
 
-::grpc::Status FtpServerService::Service::ProvideFile(::grpc::ServerContext* context, const ::mavsdk::rpc::ftp_server::ProvideFileRequest* request, ::mavsdk::rpc::ftp_server::ProvideFileResponse* response) {
+::grpc::Status FtpServerService::Service::SetRootDir(::grpc::ServerContext* context, const ::mavsdk::rpc::ftp_server::SetRootDirRequest* request, ::mavsdk::rpc::ftp_server::SetRootDirResponse* response) {
   (void) context;
   (void) request;
   (void) response;
