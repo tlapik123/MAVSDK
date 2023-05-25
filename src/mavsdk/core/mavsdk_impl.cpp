@@ -286,8 +286,8 @@ void MavsdkImpl::forward_message(mavlink_message_t& message, Connection* connect
 void MavsdkImpl::receive_message(mavlink_message_t& message, Connection* connection)
 {
     if (_message_logging_on) {
-        LogDebug() << this << " Processing message " << message.msgid << " from "
-                   << static_cast<int>(message.sysid) << "/" << static_cast<int>(message.compid) << " (seq: " << (int)message.seq << ")";
+        LogDebug() << "Processing message " << message.msgid << " from "
+                   << static_cast<int>(message.sysid) << "/" << static_cast<int>(message.compid);
     }
 
     // This is a low level interface where incoming messages can be tampered
@@ -297,7 +297,7 @@ void MavsdkImpl::receive_message(mavlink_message_t& message, Connection* connect
         if (_intercept_incoming_messages_callback != nullptr) {
             bool keep = _intercept_incoming_messages_callback(message);
             if (!keep) {
-                LogDebug() << this << " Dropped incoming message: " << int(message.msgid);
+                LogDebug() << "Dropped incoming message: " << int(message.msgid);
                 return;
             }
         }
@@ -401,8 +401,8 @@ void MavsdkImpl::receive_message(mavlink_message_t& message, Connection* connect
 bool MavsdkImpl::send_message(mavlink_message_t& message)
 {
     if (_message_logging_on) {
-        LogDebug() << this << " Sending message " << message.msgid << " from "
-                   << static_cast<int>(message.sysid) << "/" << static_cast<int>(message.compid) << " (seq: " << (int)message.seq << ")";
+        LogDebug() << "Sending message " << message.msgid << " from "
+                   << static_cast<int>(message.sysid) << "/" << static_cast<int>(message.compid);
     }
 
     // This is a low level interface where outgoing messages can be tampered
@@ -413,7 +413,7 @@ bool MavsdkImpl::send_message(mavlink_message_t& message)
             // We fake that everything was sent as instructed because
             // a potential loss would happen later, and we would not be informed
             // about it.
-            LogDebug() << this << " Dropped outgoing message: " << int(message.msgid);
+            LogDebug() << "Dropped outgoing message: " << int(message.msgid);
             return true;
         }
     }
